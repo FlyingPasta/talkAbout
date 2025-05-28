@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>これについて話して！</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>これについて話して！</h1>
+
+  <div class="genre-header">
+    <h2>ジャンル選択</h2>
+    <div class="genre-buttons">
+      <button onclick="selectAllGenres(true)">全選択</button>
+      <button onclick="selectAllGenres(false)">全解除</button>
+    </div>
+  </div>
+
+  <div id="genres" class="genre-list"></div>
+
+  <div class="generate-button">
+    <button onclick="showRandomWord()">ランダムに表示</button>
+  </div>
+
+  <div id="word"></div>
+
+  <div id="history">
+    <h3>履歴</h3>
+    <ul id="historyList"></ul>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
