@@ -12,7 +12,6 @@ h1 {
     margin-bottom: 20px;
 }
 
-/* ジャンルヘッダー：ラベル + ボタン横並び */
 .genre-header {
     display: flex;
     justify-content: center;
@@ -29,11 +28,9 @@ h1 {
 
 .genre-buttons button {
     padding: 6px 12px;
-    margin: 0;
     font-size: 0.95em;
 }
 
-/* ジャンルチェックボックス全体 */
 .genre-list {
     display: inline-block;
     text-align: left;
@@ -45,10 +42,18 @@ h1 {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.genre-list label {
-    display: block;
-    margin: 8px 0;
-    font-size: 1em;
+.genre-list details {
+    margin-bottom: 15px;
+}
+
+.genre-list summary {
+    font-weight: bold;
+    cursor: pointer;
+    margin-bottom: 5px;
+}
+
+.generate-button {
+    margin-top: 20px;
 }
 
 button {
@@ -61,11 +66,6 @@ button {
     color: white;
     cursor: pointer;
     transition: background-color 0.3s;
-}
-
-/* ランダムに表示ボタンの配置 */
-.generate-button {
-    margin-top: 20px;
 }
 
 button:hover {
@@ -102,4 +102,16 @@ button:hover {
     margin-bottom: 4px;
     border-radius: 4px;
     text-align: center;
+}
+
+.word-main {
+    font-size: 2em;
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+.word-meta {
+    margin-top: 10px;
+    font-size: 0.95em;
+    color: #666;
 }
