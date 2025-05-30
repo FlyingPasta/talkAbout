@@ -15,14 +15,28 @@ window.onload = async () => {
 function renderGenreCheckboxes(data) {
   const container = document.getElementById("genres");
   container.innerHTML = "";
-  for (const [key, value] of Object.entries(data)) {
-    const label = document.createElement("label");
-    label.style.display = "block";
-    label.innerHTML = `
-      <input type="checkbox" name="genre" value="${key}" onchange="saveGenreSelection()">
-      ${value.label}
-    `;
-    container.appendChild(label);
+
+  for (const categoryKey in data) {
+    const category = data[categoryKey];
+    const categoryDiv = document.createElement("details");
+    categoryDiv.open = true;
+
+    const summary = document.createElement("summary");
+    summary.textContent = category.category;
+    categoryDiv.appendChild(summary);
+
+    for (const genreKey in category.genres) {
+      const genre = category.genres[genreKey];
+      const label = document.createElement("label");
+      label.innerHTML = `
+        <input type="checkbox" name="genre" value="${categoryKey}:${genreKey}" onchange="saveGenreSelection()">
+        ${genre.label}
+      `;
+      label.style.display = "block";
+      categoryDiv.appendChild(label);
+    }
+
+    container.appendChild(categoryDiv);
   }
 }
 
@@ -55,23 +69,39 @@ function showRandomWord() {
     return;
   }
 
-  let combinedWords = [];
-  checked.forEach(genreKey => {
-    const words = wordsData[genreKey]?.words || [];
-    combinedWords = combinedWords.concat(words);
+  let wordPool = [];
+
+  checked.forEach(fullKey => {
+    const [catKey, genreKey] = fullKey.split(":");
+    const category = wordsData[catKey];
+    const genre = category?.genres[genreKey];
+
+    if (genre && genre.words) {
+      genre.words.forEach(word => {
+        wordPool.push({
+          word,
+          categoryLabel: category.category,
+          genreLabel: genre.label
+        });
+      });
+    }
   });
 
-  if (combinedWords.length === 0) {
+  if (wordPool.length === 0) {
     document.getElementById("word").textContent = "選ばれたジャンルに単語がありません。";
     return;
   }
 
-  const randomWord = combinedWords[Math.floor(Math.random() * combinedWords.length)];
-  document.getElementById("word").textContent = randomWord;
+  const randomItem = wordPool[Math.floor(Math.random() * wordPool.length)];
 
-  // 履歴に追加
-  addToHistory(randomWord);
+  document.getElementById("word").innerHTML = `
+    <div class="word-main">${randomItem.word}</div>
+    <div class="word-meta">（<strong>${randomItem.categoryLabel}</strong> - <strong>${randomItem.genreLabel}</strong>）</div>
+  `;
+
+  addToHistory(randomItem.word);
 }
+
 
 function addToHistory(word) {
   const historyList = document.getElementById("historyList");
@@ -79,7 +109,6 @@ function addToHistory(word) {
   li.textContent = word;
   historyList.prepend(li);
 
-  // 上限 10 件
   while (historyList.children.length > 10) {
     historyList.removeChild(historyList.lastChild);
   }
