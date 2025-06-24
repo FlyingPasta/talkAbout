@@ -109,7 +109,7 @@ function addToHistory(word) {
   li.textContent = word;
   historyList.prepend(li);
 
-  while (historyList.children.length > 10) {
+  while (historyList.children.length > 15) {
     historyList.removeChild(historyList.lastChild);
   }
 }
