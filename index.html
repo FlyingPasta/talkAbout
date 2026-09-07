@@ -1,37 +1,57 @@
 <!DOCTYPE html>
-<html lang="ja">
-
+<html lang="ja" name="robots" content="noindex">
 <head>
-  <meta charset="UTF-8" name="robots" content="noindex">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>これについて語って！</title>
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-  <h1>これについて語って！</h1>
+  <main class="container">
 
-  <div class="genre-header">
-    <h2>ジャンル選択</h2>
-    <div class="genre-buttons">
-      <button onclick="selectAllGenres(true)">全選択</button>
-      <button onclick="selectAllGenres(false)">全解除</button>
-    </div>
-  </div>
+    <h1>これについて語って！</h1>
 
-  <div id="genres" class="genre-list"></div>
+    <section class="genre-section">
 
-  <div class="generate-button">
-    <button onclick="showRandomWord()">ランダムに表示</button>
-  </div>
+      <div class="genre-header">
+        <h2>ジャンル選択</h2>
 
-  <div id="word"></div>
+        <div class="genre-buttons">
+          <button type="button" onclick="selectAllGenres(true)">
+            全選択
+          </button>
 
-  <div id="history">
-    <h3>履歴</h3>
-    <ul id="historyList"></ul>
-  </div>
+          <button type="button" onclick="selectAllGenres(false)">
+            全解除
+          </button>
+        </div>
+      </div>
+
+      <div id="genres" class="genre-list"></div>
+
+      <div class="generate-button">
+        <button type="button" onclick="showRandomWord()">
+          ランダムに表示
+        </button>
+      </div>
+
+    </section>
+
+    <section class="result-section">
+      <div id="word">
+        <div class="word-main"></div>
+        <div class="word-meta"></div>
+      </div>
+    </section>
+
+    <section id="history">
+      <h2>履歴</h2>
+      <ul id="historyList"></ul>
+    </section>
+
+  </main>
 
   <script src="script.js"></script>
 </body>
-
 </html>
